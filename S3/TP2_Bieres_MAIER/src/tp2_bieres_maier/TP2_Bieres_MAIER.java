@@ -14,17 +14,11 @@ public class TP2_Bieres_MAIER {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        BouteilleBiere uneBiere = new BouteilleBiere() ; 
-        uneBiere.Nom = "Cuvée des Trolls";
-        uneBiere.degreAlcool = 7.0;
-        uneBiere.brasserie = "Dubuisson";
-        uneBiere.ouverte = false;
+        BouteilleBiere uneBiere = new BouteilleBiere("Cuvée des trolls", 7.0 ,"Dubuisson"); 
         uneBiere.lireEtiquette(); 
+        uneBiere.Decapsuler();
         
-        BouteilleBiere Biere2 = new BouteilleBiere();
-        Biere2.Nom = " Leffe";
-        Biere2.degreAlcool = 6.6;
-        Biere2.brasserie = " Abbaye de Leffe";
+        BouteilleBiere Biere2 = new BouteilleBiere ("Leffe", 6.6, " Abbaye de Leffe");
         Biere2.lireEtiquette();
     }
     
