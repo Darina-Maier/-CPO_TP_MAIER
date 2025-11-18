@@ -9,5 +9,15 @@ package tp3_heroic_fantasy_maier;
  * @author maier
  */
 public class Baton extends Arme {
+    int age; 
+    public Baton(String nom, int niveauAttaque, int age) {
+        super(nom, niveauAttaque);
+      
+    if (age >= 0 && age <= 100) {
+        this.age = age; 
+    } else {
+        this.age = 100; 
+    }
+    }
     
 }
