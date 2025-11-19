@@ -4,6 +4,8 @@
  */
 package tp3_heroic_fantasy_maier;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author maier
@@ -20,6 +22,15 @@ public class TP3_Heroic_Fantasy_MAIER {
         Baton Baton1 = new Baton ("Chêne", 4, 5);
         Baton Baton2 = new Baton ("Charme", 5, 6);
     
+        ArrayList<String> TabArmes = new ArrayList<String>();
+        TabArmes.add("Epee1"); 
+        TabArmes.add("Epee2"); 
+        TabArmes.add("Baton1"); 
+        TabArmes.add("Baton2"); 
+        
+        for (int i = 0; i < TabArmes.size(); i++) {
+            System.out.println(TabArmes.elementAt(i));
+        }
         
         
     }
