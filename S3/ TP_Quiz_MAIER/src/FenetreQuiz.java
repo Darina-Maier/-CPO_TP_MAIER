@@ -14,7 +14,7 @@ public class FenetreQuiz extends javax.swing.JFrame {
    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FenetreQuiz.class.getName());
     private ArrayList<Question> listeQuestions;
     private int indexQuestionCourante = 0;
-    private int score;
+    private int score = 0;
     private int scoreValue =0;
     
     
@@ -205,7 +205,7 @@ public class FenetreQuiz extends javax.swing.JFrame {
         } else {
             // PLUS AUCUNE QUESTION → fin du quiz
             lblQuestion.setText("<html><h3>Quiz terminé !</h3><br>Score final : "
-                    + scoreValue + " / " + listeQuestions.size() + "</html>");
+                    + score + " / " + listeQuestions.size() + "</html>");
 
             // Désactiver les boutons
             btnRep1.setEnabled(false);
