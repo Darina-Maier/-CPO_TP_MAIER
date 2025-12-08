@@ -112,6 +112,11 @@ public class Interface_minirpojet extends javax.swing.JFrame {
                         getContentPane().add(down_chiffre_4, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 170, -1, -1));
 
                         bouton_tester.setText("TESTER");
+                        bouton_tester.addActionListener(new java.awt.event.ActionListener() {
+                            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                                bouton_testerActionPerformed(evt);
+                            }
+                        });
                         getContentPane().add(bouton_tester, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 120, 80, 40));
 
                         texte_lbl_nb_chiffres_exacts.setText("Nombre de chiffres exacts :");
@@ -153,6 +158,10 @@ public class Interface_minirpojet extends javax.swing.JFrame {
     private void down_chiffre_2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_down_chiffre_2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_down_chiffre_2ActionPerformed
+
+    private void bouton_testerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bouton_testerActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_bouton_testerActionPerformed
 
     /**
      * @param args the command line arguments
