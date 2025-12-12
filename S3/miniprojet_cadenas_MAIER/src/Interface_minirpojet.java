@@ -10,11 +10,12 @@
 public class Interface_minirpojet extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Interface_minirpojet.class.getName());
-
-    
+    private combinaison4 jeu = new combinaison4();
     /**
      * Creates new form Interface_minirpojet
      */
+    
+    
     public Interface_minirpojet() {
         initComponents();
     }
@@ -188,43 +189,71 @@ public class Interface_minirpojet extends javax.swing.JFrame {
                     }// </editor-fold>//GEN-END:initComponents
 
     private void up_chiffre_4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_up_chiffre_4ActionPerformed
-        // TODO add your handling code here:
+       jeu.augmenterChiffre(3);  
+       texte_chiffre_3.setText("" + jeu.getCombiTestee()[3]);
     }//GEN-LAST:event_up_chiffre_4ActionPerformed
 
     private void down_chiffre_2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_down_chiffre_2ActionPerformed
-        // TODO add your handling code here:
+        jeu.diminuerChiffre(1);
+        texte_chiffre_1.setText("" + jeu.getCombiTestee()[1]);
     }//GEN-LAST:event_down_chiffre_2ActionPerformed
 
     private void bouton_testerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bouton_testerActionPerformed
-        // TODO add your handling code here:
+        int[] resultat = jeu.comparer();
+
+    texte_nb_chiffres_exacts.setText("" + resultat[0]);
+    texte_nb_chiffres_haut.setText("" + resultat[1]);
+    texte_nb_chiffres_bas.setText("" + resultat[2]);
+
+    texte_score.setText( (5 - jeu.getTentatives()) + " SUR 5" );
     }//GEN-LAST:event_bouton_testerActionPerformed
 
     private void bouton_recommencerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bouton_recommencerActionPerformed
-        // TODO add your handling code here:
+        jeu.nouvellePartie();
+
+        // 2. Remettre l'affichage à zéro
+        texte_chiffre_0.setText("0");
+        texte_chiffre_1.setText("0");
+        texte_chiffre_2.setText("0");
+        texte_chiffre_3.setText("0");
+
+        // 3. Remettre les labels de résultats à zéro
+        texte_nb_chiffres_exacts.setText("0");
+        texte_nb_chiffres_haut.setText("0");
+        texte_nb_chiffres_bas.setText("0");
+
+        // 4. Réinitialiser le score
+        texte_score.setText("0 SUR 5");
     }//GEN-LAST:event_bouton_recommencerActionPerformed
 
     private void up_chiffre_1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_up_chiffre_1ActionPerformed
-        // TODO add your handling code here:
+        jeu.augmenterChiffre(0);  
+        texte_chiffre_0.setText("" + jeu.getCombiTestee()[0]); 
     }//GEN-LAST:event_up_chiffre_1ActionPerformed
 
     private void down_chiffre_1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_down_chiffre_1ActionPerformed
-        // TODO add your handling code here:
+        jeu.diminuerChiffre(0);
+    texte_chiffre_0.setText("" + jeu.getCombiTestee()[0]);
     }//GEN-LAST:event_down_chiffre_1ActionPerformed
 
     private void up_chiffre_2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_up_chiffre_2ActionPerformed
-        // TODO add your handling code here:
+       jeu.augmenterChiffre(1);  
+       texte_chiffre_1.setText("" + jeu.getCombiTestee()[1]);
     }//GEN-LAST:event_up_chiffre_2ActionPerformed
 
     private void up_chiffre_3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_up_chiffre_3ActionPerformed
-        // TODO add your handling code here:
+        jeu.augmenterChiffre(2);  
+        texte_chiffre_2.setText("" + jeu.getCombiTestee()[2]);
     }//GEN-LAST:event_up_chiffre_3ActionPerformed
 
     private void down_chiffre_3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_down_chiffre_3ActionPerformed
-        // TODO add your handling code here:
+        jeu.diminuerChiffre(2);
+        texte_chiffre_2.setText("" + jeu.getCombiTestee()[2]);
     }//GEN-LAST:event_down_chiffre_3ActionPerformed
 
     private void down_chiffre_4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_down_chiffre_4ActionPerformed
-        // TODO add your handling code here:
+        jeu.diminuerChiffre(3);
+        texte_chiffre_3.setText("" + jeu.getCombiTestee()[3]);
     }//GEN-LAST:event_down_chiffre_4ActionPerformed
 
     /**

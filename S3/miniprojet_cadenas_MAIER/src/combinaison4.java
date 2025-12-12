@@ -8,79 +8,76 @@
  * @author maier
  */
 public class combinaison4 {
-    private int[] combinaison;
-    private int tentativesRestantes;
-    private final int MAX_TENTATIVES = 10; 
-    private boolean partieGagnee;
-    private boolean partieTerminee;
+    private int[] combiSecrete = new int[4];
+    private int[] combiTestee = new int[4];
+    private int tentativesRestantes = 5;
 
     public combinaison4() {
-        combinaison = new int[4];
-        tentativesRestantes = MAX_TENTATIVES;
-        partieGagnee = false;
-        partieTerminee = false;
         genererCombiAleat();
     }
 
     private void genererCombiAleat() {
-        for (int i = 0; i < combinaison.length; i++) {
-            combinaison[i] = (int)(Math.random() * 10);
+        for (int i = 0; i < 4; i++) {
+            combiSecrete[i] = (int)(Math.random() * 10);
         }
     }
 
-    public int[] verifierEssai(int[] essai) {
-        if (partieTerminee) {
-            return null;
+    public void augmenterChiffre(int indice) {
+        combiTestee[indice]++;
+
+        if (combiTestee[indice] == -1) {
+            combiTestee[indice] = 5; 
         }
-        
-        int correct = 0;
-        int tropHauts = 0;
-        int tropBas = 0;
-        
+    }
+
+    public void diminuerChiffre(int indice) {
+        combiTestee[indice]--;
+
+        if (combiTestee[indice] == -1) {
+            combiTestee[indice] = 5; 
+        }
+    }
+
+    public int[] comparer() {
+
+        int exact = 0;
+        int haut = 0;
+        int bas = 0;
+
         for (int i = 0; i < 4; i++) {
-            if (essai[i] == combinaison[i]) {
-                correct++;
-            } else if (essai[i] > combinaison[i]) {
-                tropHauts++;
+
+            int cs = combiSecrete[i];
+            int ct = combiTestee[i];
+
+            if (cs == ct) {
+                exact++;
+            } else if (cs < ct) {
+                haut++;   
             } else {
-                tropBas++;
+                bas++;    
             }
         }
-        
+
         tentativesRestantes--;
-        
-        if (correct == 4) {
-            partieGagnee = true;
-            partieTerminee = true;
-        }
-        
-        if (tentativesRestantes == 0 && !partieGagnee) {
-            partieTerminee = true;
-        }
-        
-        return new int[]{correct, tropHauts, tropBas};
+
+        return new int[] { exact, haut, bas };
     }
-    
-    public int[] getCombinaison() {
-        return combinaison;
-    }
-    
-    public int getTentativesRestantes() {
+
+    public int getTentatives() {
         return tentativesRestantes;
     }
-    
-    public boolean isPartieGagnee() {
-        return partieGagnee;
+
+    public int[] getCombiTestee() {
+        return combiTestee;
     }
-    
-    public boolean isPartieTerminee() {
-        return partieTerminee;
+
+    public int[] getCombiSecrete() {
+        return combiSecrete;
     }
-    
+        
     public void nouvellePartie() {
-        tentativesRestantes = MAX_TENTATIVES;
-        partieGagnee = false;
-        partieTerminee = false;
+        tentativesRestantes = 5;
         genererCombiAleat();
+        combiTestee = new int[4];
     }
 }
