@@ -11,20 +11,21 @@ public class combinaison4 {
     private int[] combiSecrete = new int[4];
     private int[] combiTestee = new int[4];
     private int tentativesRestantes = 5;
-    private boolean partieCommencee = false;
     private boolean partieTerminee = false;
     private boolean partieGagnee = false;
     private int nbChiffres;
     private int tentativesMax;
     private int maxChiffre = 9; 
+    
 
     public combinaison4() {
-        this(4, 5);
+        this(4, 5,5);
     }
     
-    public combinaison4(int nbChiffres, int tentativesMax) {
+    public combinaison4(int nbChiffres, int tentativesMax, int maxChiffre) {
     this.nbChiffres = nbChiffres;
     this.tentativesMax = tentativesMax;
+    this.maxChiffre = maxChiffre;
     combiSecrete = new int[nbChiffres];
     combiTestee = new int[nbChiffres];
     nouvellePartie();
@@ -114,6 +115,28 @@ public class combinaison4 {
         combiTestee = new int[nbChiffres];
     }
     
+    // methodes bouton tester 
+    public int getEssaisUtilises() {
+        return tentativesMax - tentativesRestantes;
+    }
+
+    public String getMessageFinPartie() {
+        if (partieGagnee) {
+            return "Bravo ! Code trouvé en " + getEssaisUtilises() + " tentatives";
+        } else {
+            return "Perdu ! Le code était : " + java.util.Arrays.toString(combiSecrete);
+        }
+    }
+
+    public String getTitreFinPartie() {
+        return partieGagnee ? "Victoire" : "Défaite";
+    }
+
+    public int getTypeMessageFinPartie() {
+        return partieGagnee ? javax.swing.JOptionPane.INFORMATION_MESSAGE 
+                        : javax.swing.JOptionPane.ERROR_MESSAGE;
+    }
+    
     // ajout niveau de difficulté 
     
     public int getTentativesMax() {
@@ -126,5 +149,19 @@ public class combinaison4 {
     
     public void setMaxChiffre(int max) {
     this.maxChiffre = max;
+    }
+    
+    public void changerNiveau(String niveau) { // methode pour changer de niveau 
+    if (niveau.equals("Facile")) {
+        this.tentativesMax = 7;
+        this.maxChiffre = 5;
+    } else if (niveau.equals("Normal")) {
+        this.tentativesMax = 5;
+        this.maxChiffre = 9;
+    } else if (niveau.equals("Difficile")) {
+        this.tentativesMax = 4;
+        this.maxChiffre = 9;
+    }
+    nouvellePartie();
     }
 }

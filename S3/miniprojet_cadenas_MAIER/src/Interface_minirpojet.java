@@ -220,29 +220,17 @@ public class Interface_minirpojet extends javax.swing.JFrame {
     texte_nb_chiffres_exacts.setText("" + resultat[0]);
     texte_nb_chiffres_haut.setText("" + resultat[1]);
     texte_nb_chiffres_bas.setText("" + resultat[2]);
-
-    int essaisUtilises = jeu.getTentativesMax() - jeu.getTentatives();
-    texte_score.setText(essaisUtilises + " SUR " + jeu.getTentativesMax());
+    
+    texte_score.setText(jeu.getEssaisUtilises() + " SUR " + jeu.getTentativesMax());
 
     // Message fin de partie
     if (jeu.isPartieTerminee()) {
-        if (jeu.isPartieGagnee()) {
-            javax.swing.JOptionPane.showMessageDialog(
+        javax.swing.JOptionPane.showMessageDialog(
             this,
-            "Bravo ! Code trouvé en " +
-            (jeu.getTentativesMax() - jeu.getTentatives()) + " tentatives",
-            "Victoire",
-            javax.swing.JOptionPane.INFORMATION_MESSAGE
+            jeu.getMessageFinPartie(),
+            jeu.getTitreFinPartie(),
+            jeu.getTypeMessageFinPartie()
         );
-        } else {
-            javax.swing.JOptionPane.showMessageDialog(
-            this,
-            "Perdu ! Le code était : " +
-            java.util.Arrays.toString(jeu.getCombiSecrete()),
-            "Défaite",
-            javax.swing.JOptionPane.ERROR_MESSAGE
-        );
-        }
     }
     }//GEN-LAST:event_bouton_testerActionPerformed
 
@@ -292,14 +280,8 @@ public class Interface_minirpojet extends javax.swing.JFrame {
         );
         return; //
     }
-    // Créer un nouveau jeu selon le choix
-    if (choix.equals("Facile")) {
-        jeu = new combinaison4(4, 7, 5);
-    } else if (choix.equals("Normal")) {
-        jeu = new combinaison4(4, 5, 9);
-    } else if (choix.equals("Difficile")) {
-        jeu = new combinaison4(4, 4, 9);
-    }
+    // Appel de la méthode de changement de niveaux selon le choix
+    jeu.changerNiveau(choix);
     
     // Réinitialiser l'interface
     texte_intro.setText(
