@@ -18,10 +18,7 @@ public class Interface_minirpojet extends javax.swing.JFrame {
    
     public Interface_minirpojet() {
         initComponents();
-        texte_score.setText("0 SUR " + jeu.getTentativesMax());
-        texte_intro.setText(
-        "Trouver le bon code en moins de " + jeu.getTentativesMax() + " tentatives !"
-    );
+        jComboBox1.setSelectedIndex(1);
     }
 
     /**
@@ -251,47 +248,7 @@ public class Interface_minirpojet extends javax.swing.JFrame {
 
     private void bouton_recommencerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bouton_recommencerActionPerformed
 // ajout jcomboBox - niveau de difficuté 
-    String choix = jComboBox1.getSelectedItem().toString();
-    
-    System.out.println("=== AVANT création nouveau jeu ===");
-    System.out.println("Ancien tentativesMax: " + jeu.getTentativesMax());
-    
-    if (!partieCommencee || jeu.isPartieTerminee()) {
-    if (choix.equals( "Facile")) {
-        jeu = new combinaison4(4, 7); // 4 chiffres, 7 tentatives
-        jeu.setMaxChiffre(5);
-        texte_intro.setText("Facile : chiffres de 0 à 5, 7 tentatives");
-    } else if (choix.equals("Normal")) {
-        jeu = new combinaison4(4, 5); // 4 chiffres, 5 tentatives
-        jeu.setMaxChiffre(9);
-        texte_intro.setText("Normal : chiffres de 0 à 9, 5 tentatives");
-    } else if (choix.equals("Difficile" )) {
-        jeu = new combinaison4(4, 4); // 4 chiffres, 4 tentatives
-        jeu.setMaxChiffre(9);
-        texte_intro.setText("Difficile : chiffres de 0 à 9, 4 tentatives");
-    }
-     System.out.println("=== APRÈS création nouveau jeu ===");
-    System.out.println("Nouveau tentativesMax: " + jeu.getTentativesMax());
-    System.out.println("Nouveau tentatives restantes: " + jeu.getTentatives());
-    }
-    
-    texte_intro.setText(
-    "Niveau " + choix +
-    " : trouver le code en " + jeu.getTentativesMax() + " tentatives"
-    );
-
-    texte_score.setText("0 SUR " + jeu.getTentativesMax());
-
-    texte_chiffre_0.setText("0");
-    texte_chiffre_1.setText("0");
-    texte_chiffre_2.setText("0");
-    texte_chiffre_3.setText("0");
-
-    texte_nb_chiffres_exacts.setText("0");
-    texte_nb_chiffres_haut.setText("0");
-    texte_nb_chiffres_bas.setText("0");
-    
-    partieCommencee = false;
+       jComboBox1ActionPerformed(evt);
     }//GEN-LAST:event_bouton_recommencerActionPerformed
 
     private void up_chiffre_1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_up_chiffre_1ActionPerformed
@@ -325,14 +282,42 @@ public class Interface_minirpojet extends javax.swing.JFrame {
     }//GEN-LAST:event_down_chiffre_4ActionPerformed
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-    if (partieCommencee && !jeu.isPartieTerminee()) {
-    javax.swing.JOptionPane.showMessageDialog(
-        this,
-        "Veuillez recommencer la partie pour changer de niveau.",
-        "Changement de niveau",
-        javax.swing.JOptionPane.INFORMATION_MESSAGE
-    );
+     String choix = jComboBox1.getSelectedItem().toString();
+     if (partieCommencee && !jeu.isPartieTerminee()) {
+        javax.swing.JOptionPane.showMessageDialog(
+            this,
+            "Veuillez terminer ou recommencer la partie pour changer de niveau.",
+            "Changement de niveau",
+            javax.swing.JOptionPane.INFORMATION_MESSAGE
+        );
+        return; //
     }
+    // Créer un nouveau jeu selon le choix
+    if (choix.equals("Facile")) {
+        jeu = new combinaison4(4, 7, 5);
+    } else if (choix.equals("Normal")) {
+        jeu = new combinaison4(4, 5, 9);
+    } else if (choix.equals("Difficile")) {
+        jeu = new combinaison4(4, 4, 9);
+    }
+    
+    // Réinitialiser l'interface
+    texte_intro.setText(
+        "Niveau " + choix + " : trouver le code en " + jeu.getTentativesMax() + " tentatives"
+    );
+    
+    texte_score.setText("0 SUR " + jeu.getTentativesMax());
+    
+    texte_chiffre_0.setText("0");
+    texte_chiffre_1.setText("0");
+    texte_chiffre_2.setText("0");
+    texte_chiffre_3.setText("0");
+    
+    texte_nb_chiffres_exacts.setText("0");
+    texte_nb_chiffres_haut.setText("0");
+    texte_nb_chiffres_bas.setText("0");
+    
+    partieCommencee = false;
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
     /**
