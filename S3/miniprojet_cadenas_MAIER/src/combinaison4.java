@@ -73,7 +73,7 @@ public class combinaison4 {
 
     tentativesRestantes--;
 
-    if (exact == 4) {
+    if (exact == nbChiffres) {
         partieGagnee = true;
         partieTerminee = true;
     }

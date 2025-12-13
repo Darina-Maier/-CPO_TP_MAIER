@@ -18,6 +18,10 @@ public class Interface_minirpojet extends javax.swing.JFrame {
    
     public Interface_minirpojet() {
         initComponents();
+        texte_score.setText("0 SUR " + jeu.getTentativesMax());
+        texte_intro.setText(
+        "Trouver le bon code en moins de " + jeu.getTentativesMax() + " tentatives !"
+    );
     }
 
     /**
@@ -57,7 +61,7 @@ public class Interface_minirpojet extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        texte_intro.setText("Trouver le bon code en moins de 5 tentatives !");
+        texte_intro.setText("Trouver le bon code en moins de X tentatives !");
         getContentPane().add(texte_intro, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 30, -1, -1));
 
         up_chiffre_1.setText("/\\");
@@ -171,7 +175,7 @@ public class Interface_minirpojet extends javax.swing.JFrame {
                         getContentPane().add(texte_nb_chiffres_bas, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 320, -1, -1));
 
                         texte_score.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-                        texte_score.setText("0 SUR 5");
+                        texte_score.setText("0 SUR X");
                         texte_score.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
                         getContentPane().add(texte_score, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 260, 100, 40));
 
@@ -186,7 +190,7 @@ public class Interface_minirpojet extends javax.swing.JFrame {
                         });
                         getContentPane().add(bouton_recommencer, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 320, -1, -1));
 
-                        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Facile ", "Normal ", "Difficile " }));
+                        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Facile", "Normal", "Difficile" }));
                         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
                             public void actionPerformed(java.awt.event.ActionEvent evt) {
                                 jComboBox1ActionPerformed(evt);
@@ -220,7 +224,8 @@ public class Interface_minirpojet extends javax.swing.JFrame {
     texte_nb_chiffres_haut.setText("" + resultat[1]);
     texte_nb_chiffres_bas.setText("" + resultat[2]);
 
-    texte_score.setText((5 - jeu.getTentatives()) + " SUR 5");
+    int essaisUtilises = jeu.getTentativesMax() - jeu.getTentatives();
+    texte_score.setText(essaisUtilises + " SUR " + jeu.getTentativesMax());
 
     // Message fin de partie
     if (jeu.isPartieTerminee()) {
@@ -247,7 +252,12 @@ public class Interface_minirpojet extends javax.swing.JFrame {
     private void bouton_recommencerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bouton_recommencerActionPerformed
 // ajout jcomboBox - niveau de difficuté 
     String choix = jComboBox1.getSelectedItem().toString();
-    if (choix.equals("Facile")) {
+    
+    System.out.println("=== AVANT création nouveau jeu ===");
+    System.out.println("Ancien tentativesMax: " + jeu.getTentativesMax());
+    
+    if (!partieCommencee || jeu.isPartieTerminee()) {
+    if (choix.equals( "Facile")) {
         jeu = new combinaison4(4, 7); // 4 chiffres, 7 tentatives
         jeu.setMaxChiffre(5);
         texte_intro.setText("Facile : chiffres de 0 à 5, 7 tentatives");
@@ -255,12 +265,15 @@ public class Interface_minirpojet extends javax.swing.JFrame {
         jeu = new combinaison4(4, 5); // 4 chiffres, 5 tentatives
         jeu.setMaxChiffre(9);
         texte_intro.setText("Normal : chiffres de 0 à 9, 5 tentatives");
-    } else if (choix.equals("Difficile")) {
+    } else if (choix.equals("Difficile" )) {
         jeu = new combinaison4(4, 4); // 4 chiffres, 4 tentatives
         jeu.setMaxChiffre(9);
         texte_intro.setText("Difficile : chiffres de 0 à 9, 4 tentatives");
     }
-    jeu.nouvellePartie();
+     System.out.println("=== APRÈS création nouveau jeu ===");
+    System.out.println("Nouveau tentativesMax: " + jeu.getTentativesMax());
+    System.out.println("Nouveau tentatives restantes: " + jeu.getTentatives());
+    }
     
     texte_intro.setText(
     "Niveau " + choix +
@@ -319,7 +332,6 @@ public class Interface_minirpojet extends javax.swing.JFrame {
         "Changement de niveau",
         javax.swing.JOptionPane.INFORMATION_MESSAGE
     );
-    jComboBox1.setSelectedIndex(1); // Normal
     }
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
