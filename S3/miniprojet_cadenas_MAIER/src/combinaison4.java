@@ -11,32 +11,43 @@ public class combinaison4 {
     private int[] combiSecrete = new int[4];
     private int[] combiTestee = new int[4];
     private int tentativesRestantes = 5;
+    private boolean partieCommencee = false;
     private boolean partieTerminee = false;
     private boolean partieGagnee = false;
+    private int nbChiffres;
+    private int tentativesMax;
+    private int maxChiffre = 9; 
 
     public combinaison4() {
-        genererCombiAleat();
+        this(4, 5);
+    }
+    
+    public combinaison4(int nbChiffres, int tentativesMax) {
+    this.nbChiffres = nbChiffres;
+    this.tentativesMax = tentativesMax;
+    combiSecrete = new int[nbChiffres];
+    combiTestee = new int[nbChiffres];
+    nouvellePartie();
     }
 
     private void genererCombiAleat() {
-        for (int i = 0; i < 4; i++) {
-            combiSecrete[i] = (int)(Math.random() * 10);
+        for (int i = 0; i < nbChiffres; i++) {
+            combiSecrete[i] = (int)(Math.random() * (maxChiffre + 1));
         }
     }
-
+    
     public void augmenterChiffre(int indice) {
         combiTestee[indice]++;
 
-        if (combiTestee[indice] == 10) {
+        if (combiTestee[indice] > maxChiffre) {
             combiTestee[indice] = 0; 
         }
     }
 
     public void diminuerChiffre(int indice) {
         combiTestee[indice]--;
-
-        if (combiTestee[indice] == -1) {
-            combiTestee[indice] =9; 
+    if (combiTestee[indice] < 0) {
+        combiTestee[indice] = maxChiffre;
         }
     }
     
@@ -50,7 +61,7 @@ public class combinaison4 {
     int haut = 0;
     int bas = 0;
 
-    for (int i = 0; i < 4; i++) {
+    for (int i = 0; i < nbChiffres; i++) { 
         if (combiSecrete[i] == combiTestee[i]) {
             exact++;
         } else if (combiTestee[i] > combiSecrete[i]) {
@@ -96,10 +107,24 @@ public class combinaison4 {
     }
         
     public void nouvellePartie() {
-        tentativesRestantes = 5;
+        tentativesRestantes = tentativesMax;
         partieTerminee = false;
         partieGagnee = false;
         genererCombiAleat();
-        combiTestee = new int[4];
+        combiTestee = new int[nbChiffres];
+    }
+    
+    // ajout niveau de difficulté 
+    
+    public int getTentativesMax() {
+        return tentativesMax;
+    }
+
+    public int getNbChiffres() {
+        return nbChiffres;
+    }
+    
+    public void setMaxChiffre(int max) {
+    this.maxChiffre = max;
     }
 }

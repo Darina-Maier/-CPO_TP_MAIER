@@ -11,11 +11,11 @@ public class Interface_minirpojet extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Interface_minirpojet.class.getName());
     private combinaison4 jeu = new combinaison4();
+    private boolean partieCommencee = false;
     /**
      * Creates new form Interface_minirpojet
      */
-    
-    
+   
     public Interface_minirpojet() {
         initComponents();
     }
@@ -52,6 +52,7 @@ public class Interface_minirpojet extends javax.swing.JFrame {
         texte_score = new javax.swing.JLabel();
         texte_tentatives = new javax.swing.JLabel();
         bouton_recommencer = new javax.swing.JButton();
+        jComboBox1 = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -185,6 +186,14 @@ public class Interface_minirpojet extends javax.swing.JFrame {
                         });
                         getContentPane().add(bouton_recommencer, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 320, -1, -1));
 
+                        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Facile ", "Normal ", "Difficile " }));
+                        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+                            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                                jComboBox1ActionPerformed(evt);
+                            }
+                        });
+                        getContentPane().add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 50, 100, 40));
+
                         pack();
                     }// </editor-fold>//GEN-END:initComponents
 
@@ -199,7 +208,8 @@ public class Interface_minirpojet extends javax.swing.JFrame {
     }//GEN-LAST:event_down_chiffre_2ActionPerformed
 
     private void bouton_testerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bouton_testerActionPerformed
-    // On bloque si la partie est terminée
+    partieCommencee = true;
+// On bloque si la partie est terminée
     if (jeu.isPartieTerminee()) {
         return;
     }
@@ -215,15 +225,49 @@ public class Interface_minirpojet extends javax.swing.JFrame {
     // Message fin de partie
     if (jeu.isPartieTerminee()) {
         if (jeu.isPartieGagnee()) {
-            texte_intro.setText(" GAGNÉ !");
+            javax.swing.JOptionPane.showMessageDialog(
+            this,
+            "Bravo ! Code trouvé en " +
+            (jeu.getTentativesMax() - jeu.getTentatives()) + " tentatives",
+            "Victoire",
+            javax.swing.JOptionPane.INFORMATION_MESSAGE
+        );
         } else {
-            texte_intro.setText(" PERDU !");
+            javax.swing.JOptionPane.showMessageDialog(
+            this,
+            "Perdu ! Le code était : " +
+            java.util.Arrays.toString(jeu.getCombiSecrete()),
+            "Défaite",
+            javax.swing.JOptionPane.ERROR_MESSAGE
+        );
         }
     }
     }//GEN-LAST:event_bouton_testerActionPerformed
 
     private void bouton_recommencerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bouton_recommencerActionPerformed
-        jeu.nouvellePartie();
+// ajout jcomboBox - niveau de difficuté 
+    String choix = jComboBox1.getSelectedItem().toString();
+    if (choix.equals("Facile")) {
+        jeu = new combinaison4(4, 7); // 4 chiffres, 7 tentatives
+        jeu.setMaxChiffre(5);
+        texte_intro.setText("Facile : chiffres de 0 à 5, 7 tentatives");
+    } else if (choix.equals("Normal")) {
+        jeu = new combinaison4(4, 5); // 4 chiffres, 5 tentatives
+        jeu.setMaxChiffre(9);
+        texte_intro.setText("Normal : chiffres de 0 à 9, 5 tentatives");
+    } else if (choix.equals("Difficile")) {
+        jeu = new combinaison4(4, 4); // 4 chiffres, 4 tentatives
+        jeu.setMaxChiffre(9);
+        texte_intro.setText("Difficile : chiffres de 0 à 9, 4 tentatives");
+    }
+    jeu.nouvellePartie();
+    
+    texte_intro.setText(
+    "Niveau " + choix +
+    " : trouver le code en " + jeu.getTentativesMax() + " tentatives"
+    );
+
+    texte_score.setText("0 SUR " + jeu.getTentativesMax());
 
     texte_chiffre_0.setText("0");
     texte_chiffre_1.setText("0");
@@ -233,10 +277,8 @@ public class Interface_minirpojet extends javax.swing.JFrame {
     texte_nb_chiffres_exacts.setText("0");
     texte_nb_chiffres_haut.setText("0");
     texte_nb_chiffres_bas.setText("0");
-
-    texte_score.setText("0 SUR 5");
-
-    texte_intro.setText("Trouver le bon code en moins de 5 tentatives !");
+    
+    partieCommencee = false;
     }//GEN-LAST:event_bouton_recommencerActionPerformed
 
     private void up_chiffre_1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_up_chiffre_1ActionPerformed
@@ -268,6 +310,18 @@ public class Interface_minirpojet extends javax.swing.JFrame {
         jeu.diminuerChiffre(3);
         texte_chiffre_3.setText("" + jeu.getCombiTestee()[3]);
     }//GEN-LAST:event_down_chiffre_4ActionPerformed
+
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+    if (partieCommencee && !jeu.isPartieTerminee()) {
+    javax.swing.JOptionPane.showMessageDialog(
+        this,
+        "Veuillez recommencer la partie pour changer de niveau.",
+        "Changement de niveau",
+        javax.swing.JOptionPane.INFORMATION_MESSAGE
+    );
+    jComboBox1.setSelectedIndex(1); // Normal
+    }
+    }//GEN-LAST:event_jComboBox1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -301,6 +355,7 @@ public class Interface_minirpojet extends javax.swing.JFrame {
     private javax.swing.JButton down_chiffre_2;
     private javax.swing.JButton down_chiffre_3;
     private javax.swing.JButton down_chiffre_4;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel texte_chiffre_0;
     private javax.swing.JLabel texte_chiffre_1;
     private javax.swing.JLabel texte_chiffre_2;
