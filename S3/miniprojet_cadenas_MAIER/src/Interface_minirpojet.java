@@ -199,31 +199,44 @@ public class Interface_minirpojet extends javax.swing.JFrame {
     }//GEN-LAST:event_down_chiffre_2ActionPerformed
 
     private void bouton_testerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bouton_testerActionPerformed
-        int[] resultat = jeu.comparer();
+    // On bloque si la partie est terminée
+    if (jeu.isPartieTerminee()) {
+        return;
+    }
+
+    int[] resultat = jeu.comparer();
 
     texte_nb_chiffres_exacts.setText("" + resultat[0]);
     texte_nb_chiffres_haut.setText("" + resultat[1]);
     texte_nb_chiffres_bas.setText("" + resultat[2]);
 
-    texte_score.setText( (5 - jeu.getTentatives()) + " SUR 5" );
+    texte_score.setText((5 - jeu.getTentatives()) + " SUR 5");
+
+    // Message fin de partie
+    if (jeu.isPartieTerminee()) {
+        if (jeu.isPartieGagnee()) {
+            texte_intro.setText(" GAGNÉ !");
+        } else {
+            texte_intro.setText(" PERDU !");
+        }
+    }
     }//GEN-LAST:event_bouton_testerActionPerformed
 
     private void bouton_recommencerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bouton_recommencerActionPerformed
         jeu.nouvellePartie();
 
-        // 2. Remettre l'affichage à zéro
-        texte_chiffre_0.setText("0");
-        texte_chiffre_1.setText("0");
-        texte_chiffre_2.setText("0");
-        texte_chiffre_3.setText("0");
+    texte_chiffre_0.setText("0");
+    texte_chiffre_1.setText("0");
+    texte_chiffre_2.setText("0");
+    texte_chiffre_3.setText("0");
 
-        // 3. Remettre les labels de résultats à zéro
-        texte_nb_chiffres_exacts.setText("0");
-        texte_nb_chiffres_haut.setText("0");
-        texte_nb_chiffres_bas.setText("0");
+    texte_nb_chiffres_exacts.setText("0");
+    texte_nb_chiffres_haut.setText("0");
+    texte_nb_chiffres_bas.setText("0");
 
-        // 4. Réinitialiser le score
-        texte_score.setText("0 SUR 5");
+    texte_score.setText("0 SUR 5");
+
+    texte_intro.setText("Trouver le bon code en moins de 5 tentatives !");
     }//GEN-LAST:event_bouton_recommencerActionPerformed
 
     private void up_chiffre_1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_up_chiffre_1ActionPerformed
