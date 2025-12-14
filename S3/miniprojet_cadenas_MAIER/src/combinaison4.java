@@ -19,7 +19,7 @@ public class combinaison4 {
     
 
     public combinaison4() {
-        this(4, 5,5);
+        this(4, 5, 9);
     }
     
     public combinaison4(int nbChiffres, int tentativesMax, int maxChiffre) {
@@ -147,9 +147,6 @@ public class combinaison4 {
         return nbChiffres;
     }
     
-    public void setMaxChiffre(int max) {
-    this.maxChiffre = max;
-    }
     
     public void changerNiveau(String niveau) { // methode pour changer de niveau 
     if (niveau.equals("Facile")) {

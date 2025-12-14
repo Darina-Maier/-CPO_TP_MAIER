@@ -20,6 +20,19 @@ public class Interface_minirpojet extends javax.swing.JFrame {
         initComponents();
         jComboBox1.setSelectedIndex(1);
     }
+    public Interface_minirpojet(String niveau) {
+        initComponents();
+        
+        // Convertir le niveau (car l'accueil utilise "FACILE" en majuscules)
+        String niveauConverti = niveau.substring(0, 1).toUpperCase() + niveau.substring(1).toLowerCase();
+        // "FACILE" devient "Facile", "NORMAL" devient "Normal", etc.
+        
+        // Définir le niveau dans le ComboBox
+        jComboBox1.setSelectedItem(niveauConverti);
+        
+        // Optionnel : désactiver le ComboBox pour qu'on ne puisse pas changer en cours de jeu
+        jComboBox1.setEnabled(false);
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -54,12 +67,16 @@ public class Interface_minirpojet extends javax.swing.JFrame {
         texte_tentatives = new javax.swing.JLabel();
         bouton_recommencer = new javax.swing.JButton();
         jComboBox1 = new javax.swing.JComboBox<>();
+        jLabel1 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(600, 500));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        texte_intro.setFont(new java.awt.Font("Segoe UI Black", 1, 12)); // NOI18N
         texte_intro.setText("Trouver le bon code en moins de X tentatives !");
-        getContentPane().add(texte_intro, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 30, -1, -1));
+        getContentPane().add(texte_intro, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 50, -1, -1));
 
         up_chiffre_1.setText("/\\");
             up_chiffre_1.addActionListener(new java.awt.event.ActionListener() {
@@ -67,7 +84,7 @@ public class Interface_minirpojet extends javax.swing.JFrame {
                     up_chiffre_1ActionPerformed(evt);
                 }
             });
-            getContentPane().add(up_chiffre_1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, 75, -1));
+            getContentPane().add(up_chiffre_1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 100, 75, -1));
 
             up_chiffre_2.setText("/\\");
                 up_chiffre_2.addActionListener(new java.awt.event.ActionListener() {
@@ -75,7 +92,7 @@ public class Interface_minirpojet extends javax.swing.JFrame {
                         up_chiffre_2ActionPerformed(evt);
                     }
                 });
-                getContentPane().add(up_chiffre_2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 90, 75, -1));
+                getContentPane().add(up_chiffre_2, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 100, 75, -1));
 
                 up_chiffre_3.setText("/\\");
                     up_chiffre_3.addActionListener(new java.awt.event.ActionListener() {
@@ -83,7 +100,7 @@ public class Interface_minirpojet extends javax.swing.JFrame {
                             up_chiffre_3ActionPerformed(evt);
                         }
                     });
-                    getContentPane().add(up_chiffre_3, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 90, 75, -1));
+                    getContentPane().add(up_chiffre_3, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 100, 75, -1));
 
                     up_chiffre_4.setText("/\\");
                         up_chiffre_4.addActionListener(new java.awt.event.ActionListener() {
@@ -91,27 +108,39 @@ public class Interface_minirpojet extends javax.swing.JFrame {
                                 up_chiffre_4ActionPerformed(evt);
                             }
                         });
-                        getContentPane().add(up_chiffre_4, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 90, 75, -1));
+                        getContentPane().add(up_chiffre_4, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 100, 75, -1));
 
+                        texte_chiffre_0.setBackground(new java.awt.Color(153, 255, 51));
+                        texte_chiffre_0.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
                         texte_chiffre_0.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
                         texte_chiffre_0.setText("0");
+                        texte_chiffre_0.setToolTipText("");
                         texte_chiffre_0.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-                        getContentPane().add(texte_chiffre_0, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 120, 50, 40));
+                        getContentPane().add(texte_chiffre_0, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 130, 50, 40));
 
+                        texte_chiffre_1.setBackground(new java.awt.Color(153, 255, 51));
+                        texte_chiffre_1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
                         texte_chiffre_1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
                         texte_chiffre_1.setText("0");
+                        texte_chiffre_1.setToolTipText("");
                         texte_chiffre_1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-                        getContentPane().add(texte_chiffre_1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 120, 60, 40));
+                        getContentPane().add(texte_chiffre_1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 130, 60, 40));
 
+                        texte_chiffre_2.setBackground(new java.awt.Color(153, 255, 51));
+                        texte_chiffre_2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
                         texte_chiffre_2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
                         texte_chiffre_2.setText("0");
+                        texte_chiffre_2.setToolTipText("");
                         texte_chiffre_2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-                        getContentPane().add(texte_chiffre_2, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 120, 50, 40));
+                        getContentPane().add(texte_chiffre_2, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 130, 50, 40));
 
+                        texte_chiffre_3.setBackground(new java.awt.Color(153, 255, 51));
+                        texte_chiffre_3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
                         texte_chiffre_3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
                         texte_chiffre_3.setText("0");
+                        texte_chiffre_3.setToolTipText("");
                         texte_chiffre_3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-                        getContentPane().add(texte_chiffre_3, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 120, 50, 40));
+                        getContentPane().add(texte_chiffre_3, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 130, 50, 40));
 
                         down_chiffre_1.setText("\\/");
                         down_chiffre_1.addActionListener(new java.awt.event.ActionListener() {
@@ -119,7 +148,7 @@ public class Interface_minirpojet extends javax.swing.JFrame {
                                 down_chiffre_1ActionPerformed(evt);
                             }
                         });
-                        getContentPane().add(down_chiffre_1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 170, -1, -1));
+                        getContentPane().add(down_chiffre_1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 180, -1, -1));
 
                         down_chiffre_2.setText("\\/");
                         down_chiffre_2.addActionListener(new java.awt.event.ActionListener() {
@@ -127,7 +156,7 @@ public class Interface_minirpojet extends javax.swing.JFrame {
                                 down_chiffre_2ActionPerformed(evt);
                             }
                         });
-                        getContentPane().add(down_chiffre_2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 170, -1, -1));
+                        getContentPane().add(down_chiffre_2, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 180, -1, -1));
 
                         down_chiffre_3.setText("\\/");
                         down_chiffre_3.addActionListener(new java.awt.event.ActionListener() {
@@ -135,7 +164,7 @@ public class Interface_minirpojet extends javax.swing.JFrame {
                                 down_chiffre_3ActionPerformed(evt);
                             }
                         });
-                        getContentPane().add(down_chiffre_3, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 170, -1, -1));
+                        getContentPane().add(down_chiffre_3, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 180, -1, -1));
 
                         down_chiffre_4.setText("\\/");
                         down_chiffre_4.addActionListener(new java.awt.event.ActionListener() {
@@ -143,7 +172,7 @@ public class Interface_minirpojet extends javax.swing.JFrame {
                                 down_chiffre_4ActionPerformed(evt);
                             }
                         });
-                        getContentPane().add(down_chiffre_4, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 170, -1, -1));
+                        getContentPane().add(down_chiffre_4, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 180, -1, -1));
 
                         bouton_tester.setText("TESTER");
                         bouton_tester.addActionListener(new java.awt.event.ActionListener() {
@@ -151,33 +180,42 @@ public class Interface_minirpojet extends javax.swing.JFrame {
                                 bouton_testerActionPerformed(evt);
                             }
                         });
-                        getContentPane().add(bouton_tester, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 120, 80, 40));
+                        getContentPane().add(bouton_tester, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 130, 80, 40));
 
+                        texte_lbl_nb_chiffres_exacts.setForeground(new java.awt.Color(0, 204, 0));
                         texte_lbl_nb_chiffres_exacts.setText("Nombre de chiffres exacts :");
-                        getContentPane().add(texte_lbl_nb_chiffres_exacts, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 240, -1, -1));
+                        getContentPane().add(texte_lbl_nb_chiffres_exacts, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 240, -1, -1));
 
+                        texte_nb_chiffres_exacts.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+                        texte_nb_chiffres_exacts.setForeground(new java.awt.Color(0, 153, 51));
                         texte_nb_chiffres_exacts.setText("0");
-                        getContentPane().add(texte_nb_chiffres_exacts, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 240, -1, -1));
+                        getContentPane().add(texte_nb_chiffres_exacts, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 240, -1, -1));
 
+                        texte_lbl_nb_chiffres_haut.setForeground(new java.awt.Color(204, 0, 0));
                         texte_lbl_nb_chiffres_haut.setText("Nombre de chiffres trop haut :");
-                        getContentPane().add(texte_lbl_nb_chiffres_haut, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 280, -1, -1));
+                        getContentPane().add(texte_lbl_nb_chiffres_haut, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 270, -1, -1));
 
+                        texte_nb_chiffres_haut.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+                        texte_nb_chiffres_haut.setForeground(new java.awt.Color(204, 0, 51));
                         texte_nb_chiffres_haut.setText("0");
-                        getContentPane().add(texte_nb_chiffres_haut, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 280, -1, -1));
+                        getContentPane().add(texte_nb_chiffres_haut, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 270, -1, -1));
 
+                        texte_lbl_nb_chiffres_bas.setForeground(new java.awt.Color(255, 153, 0));
                         texte_lbl_nb_chiffres_bas.setText("Nombre de chiffres trop bas :");
-                        getContentPane().add(texte_lbl_nb_chiffres_bas, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 320, -1, -1));
+                        getContentPane().add(texte_lbl_nb_chiffres_bas, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 310, -1, -1));
 
+                        texte_nb_chiffres_bas.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+                        texte_nb_chiffres_bas.setForeground(new java.awt.Color(255, 153, 0));
                         texte_nb_chiffres_bas.setText("0");
-                        getContentPane().add(texte_nb_chiffres_bas, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 320, -1, -1));
+                        getContentPane().add(texte_nb_chiffres_bas, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 310, -1, -1));
 
                         texte_score.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
                         texte_score.setText("0 SUR X");
                         texte_score.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-                        getContentPane().add(texte_score, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 260, 100, 40));
+                        getContentPane().add(texte_score, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 260, 100, 40));
 
                         texte_tentatives.setText("TENTATIVES");
-                        getContentPane().add(texte_tentatives, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 230, -1, -1));
+                        getContentPane().add(texte_tentatives, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 230, -1, -1));
 
                         bouton_recommencer.setText("Recommencer");
                         bouton_recommencer.addActionListener(new java.awt.event.ActionListener() {
@@ -185,7 +223,7 @@ public class Interface_minirpojet extends javax.swing.JFrame {
                                 bouton_recommencerActionPerformed(evt);
                             }
                         });
-                        getContentPane().add(bouton_recommencer, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 320, -1, -1));
+                        getContentPane().add(bouton_recommencer, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 320, -1, -1));
 
                         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Facile", "Normal", "Difficile" }));
                         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
@@ -193,7 +231,19 @@ public class Interface_minirpojet extends javax.swing.JFrame {
                                 jComboBox1ActionPerformed(evt);
                             }
                         });
-                        getContentPane().add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 50, 100, 40));
+                        getContentPane().add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 100, 40));
+
+                        jLabel1.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
+                        jLabel1.setText("Niveau : ");
+                        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 6, -1, 30));
+
+                        jButton1.setText("Menu");
+                        jButton1.addActionListener(new java.awt.event.ActionListener() {
+                            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                                jButton1ActionPerformed(evt);
+                            }
+                        });
+                        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 360, -1, -1));
 
                         pack();
                     }// </editor-fold>//GEN-END:initComponents
@@ -236,7 +286,19 @@ public class Interface_minirpojet extends javax.swing.JFrame {
 
     private void bouton_recommencerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bouton_recommencerActionPerformed
 // ajout jcomboBox - niveau de difficuté 
-       jComboBox1ActionPerformed(evt);
+    String niveauActuel = jComboBox1.getSelectedItem().toString();
+    jeu.changerNiveau(niveauActuel); // réinitialise la partie avec le même niveau
+    partieCommencee = false;
+
+    // Réinitialiser l'interface
+    texte_score.setText("0 SUR " + jeu.getTentativesMax());
+    texte_chiffre_0.setText("0");
+    texte_chiffre_1.setText("0");
+    texte_chiffre_2.setText("0");
+    texte_chiffre_3.setText("0");
+    texte_nb_chiffres_exacts.setText("0");
+    texte_nb_chiffres_haut.setText("0");
+    texte_nb_chiffres_bas.setText("0");
     }//GEN-LAST:event_bouton_recommencerActionPerformed
 
     private void up_chiffre_1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_up_chiffre_1ActionPerformed
@@ -246,7 +308,7 @@ public class Interface_minirpojet extends javax.swing.JFrame {
 
     private void down_chiffre_1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_down_chiffre_1ActionPerformed
         jeu.diminuerChiffre(0);
-    texte_chiffre_0.setText("" + jeu.getCombiTestee()[0]);
+        texte_chiffre_0.setText("" + jeu.getCombiTestee()[0]);
     }//GEN-LAST:event_down_chiffre_1ActionPerformed
 
     private void up_chiffre_2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_up_chiffre_2ActionPerformed
@@ -302,6 +364,13 @@ public class Interface_minirpojet extends javax.swing.JFrame {
     partieCommencee = false;
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    Ecranacceuil accueil = new Ecranacceuil();
+    accueil.setLocationRelativeTo(null); // centre la fenêtre
+    accueil.setVisible(true);
+    this.dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -334,7 +403,9 @@ public class Interface_minirpojet extends javax.swing.JFrame {
     private javax.swing.JButton down_chiffre_2;
     private javax.swing.JButton down_chiffre_3;
     private javax.swing.JButton down_chiffre_4;
+    private javax.swing.JButton jButton1;
     private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel texte_chiffre_0;
     private javax.swing.JLabel texte_chiffre_1;
     private javax.swing.JLabel texte_chiffre_2;
